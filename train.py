@@ -138,29 +138,8 @@ def cross_entropy_loss(y_pred, y_true):
     # Apply softmax to get probabilities
     probs = softmax(y_pred)
     
-    # TODO: Compute cross-entropy loss with softmax
-    #
-    # Cross-entropy loss measures the difference between predicted probabilities
-    # and true labels. It's commonly used for classification problems.
-    #
-    # Mathematical formula: 
-    # loss = -mean(sum(y_true * log(probs), axis=1))
-    #
-    # Steps:
-    # 1. Apply softmax to convert logits to probabilities: probs = softmax(y_pred)
-    # 2. Compute element-wise: y_true * log(probs)
-    #    - Use anp.log() for autograd compatibility
-    # 3. Sum across classes for each sample
-    # 4. Apply negative sign and take mean
-    #
-    # Example:
-    # If y_true = [[0, 1, 0], [1, 0, 0]] and probs = [[0.1, 0.8, 0.1], [0.9, 0.05, 0.05]]
-    # Then loss = -mean([log(0.8), log(0.9)]) = -mean([-0.223, -0.105]) = 0.164
-    
     # Compute cross-entropy loss
-    loss = -anp.mean(anp.sum(y_true * anp.log(probs))
-    raise NotImplementedError
-    
+    loss = -anp.mean(anp.sum(y_true * anp.log(probs), axis = 1))
     return loss
 
 
@@ -273,7 +252,7 @@ def train_model(model, X_train, y_train, X_val, y_val, X_test, y_test, epochs, l
             #
             # Note: 'learning_rate' is passed as a parameter to this function
             
-            raise NotImplementedError
+            new_params = params - (learning_rate * gradients)
             model.set_params(new_params)
             
             # Compute loss for recording with updated parameters
